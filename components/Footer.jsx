@@ -15,7 +15,7 @@ const Con = styled.div`
     width: 100%;     
     display: flex; 
     align-items: center; 
-    padding: 10px 50px; 
+    padding: 30px 50px; 
 `;
 
 export default Footer

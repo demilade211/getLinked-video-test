@@ -7,7 +7,7 @@ const NavBar = () => {
     return (
         <Con>
             <div className='left flex items-center'>
-                <img className='mr-2' src="/images/logo.svg" alt="img" />
+                <img className='mr-2 mb-3 lg:mb-0' src="/images/logo.svg" alt="img" />
                 <div>
                     <p className='top'>Frontend developer</p>
                     <p className='bottom'>Skill assessment test</p>
@@ -27,6 +27,7 @@ const NavBar = () => {
 const Con = styled.div`  
     width: 100%;     
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center; 
     padding: 10px 50px;
