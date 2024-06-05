@@ -16,32 +16,36 @@ const style = {
     border: "none",
     bgcolor: 'rgba(245, 243, 255, 1)',
     borderRadius: "18px",
-    outline: "none", 
+    outline: "none",
     '@media (max-width: 500px)': {
         width: "90%",
     },
 };
 
-const ProceedModal = ({mOpen, handleModClose,}) => {
+const ProceedModal = ({ mOpen, handleModClose,buttonDisabled }) => {
     return (
         <Modal
             open={mOpen}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
-            onClose={handleModClose} 
+            onClose={handleModClose}
         >
             <Box sx={style}>
                 <ModCon>
 
                     <div className='head-row'>
                         <p>Start assessment</p>
-                        <CloseBtn>Close</CloseBtn>
+                        <CloseBtn onClick={handleModClose}>Close</CloseBtn>
                     </div>
                     <div className='main-row'>
-
+                        <h1>Proceed to start assessment</h1>
+                        <p>
+                            Kindly keep to the rules of the assessment and
+                            sit up, stay in front of your camera/webcam and start your assessment.
+                            </p>
                     </div>
                     <div className='btn-row'>
-                        <PurpleSmallBtn content="Proceed"/>
+                        <PurpleSmallBtn disabled={buttonDisabled} content="Proceed" />
                     </div>
                 </ModCon>
 
@@ -51,10 +55,10 @@ const ProceedModal = ({mOpen, handleModClose,}) => {
 }
 
 const ModCon = styled.div`
-  width:100%;  
-  margin-bottom:20px; 
+  width:100%;   
   display: flex;
   flex-direction: column; 
+  justify-content: space-between;
   .head-row{
     width: 100%;
     height: 64px;
@@ -76,13 +80,36 @@ const ModCon = styled.div`
     }
   }
   .main-row{
-    width: 100%;
-    height: 100px;
+    width: 100%; 
+    padding: 40px;
+    background-color: rgba(245, 243, 255, 1);
+    h1{
+        font-family: DM Sans;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 23px;
+        letter-spacing: -0.23999999463558197px;
+        text-align: center;
+        color: rgba(117, 90, 226, 1);
+        margin-bottom: 10px;
+    }
+    p{
+        font-family: DM Sans;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18.23px;
+        letter-spacing: -0.23999999463558197px;
+        text-align: center;
+        color: rgba(103, 94, 139, 1);
+    }
   }
   .btn-row{
     display: flex;
     justify-content: flex-end;
-    padding: 0 30px;
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 1);
+    border-bottom-left-radius:18px;
+    border-bottom-right-radius:18px;
   }
 `;
 

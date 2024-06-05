@@ -13,6 +13,7 @@ export default function Home() {
     show: false,
     message: ""
   });
+  const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const handleShowModal = (e) => {
     setShowModal(prev => ({ ...prev, show: true }))
@@ -21,7 +22,7 @@ export default function Home() {
 
   return (
     <AppLayout>
-      <ProceedModal mOpen={showModal.show} handleModClose={handleCloseModal}/>
+      <ProceedModal mOpen={showModal.show} handleModClose={handleCloseModal} buttonDisabled={buttonDisabled}/>
       <Con>
         <div className='inner'>
           <h1>System check</h1>
@@ -36,8 +37,8 @@ export default function Home() {
             and lips. You can initiate a 5-second recording of yourself by clicking the
             button below.
           </p>
-          <VideoSettings />
-          <PurpleBtn content="Take picture and continue" onClick={handleShowModal}/>
+          <VideoSettings setButtonDisabled={setButtonDisabled}/>
+          <PurpleBtn disabled={buttonDisabled} content="Take picture and continue" onClick={handleShowModal}/>
         </div>
       </Con>
     </AppLayout>
