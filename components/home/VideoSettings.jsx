@@ -154,7 +154,6 @@ const VideoSettings = ({ setButtonDisabled }) => {
                                 {!isBrightnessNormal && <img className='' src="/images/serlight.svg" alt="img" />}
                             </>
                         }
-
                     </div>
                     {isBrightnessNormal === null ?
                         <div className='icon-con mb-1'>
