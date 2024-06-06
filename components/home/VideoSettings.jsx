@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Webcam from 'react-webcam';
 import * as cocoSsd from '@tensorflow-models/coco-ssd';
 import '@tensorflow/tfjs';
-import { containsPerson, checkMicrophone, analyzeBrightness, checkInternetConnection } from "@/utils/mediaHelpers";
+import { containsPerson, checkMicrophone, checkCameraAndMic, analyzeBrightness, checkInternetConnection } from "@/utils/mediaHelpers";
 
 const VideoSettings = ({ setButtonDisabled }) => {
     const webcamRef = useRef(null);
@@ -14,7 +14,7 @@ const VideoSettings = ({ setButtonDisabled }) => {
     const [isCameraOn, setIsCameraOn] = useState(null);
     const [isMicOn, setIsMicOn] = useState(null);
     const [isInternetStable, setIsInternetStable] = useState(null);
-    const [isBrightnessNormal, setIsBrightnessNormal] = useState(null); 
+    const [isBrightnessNormal, setIsBrightnessNormal] = useState(null);
 
     useEffect(() => {
         const loadModel = async () => {
@@ -25,9 +25,11 @@ const VideoSettings = ({ setButtonDisabled }) => {
     }, []);
 
     useEffect(() => {
+
         const checkDevices = async () => {
+            const { cameraStatus } = await checkCameraAndMic()
             if (webcamRef.current) {
-                setIsCameraOn(true);
+                setIsCameraOn(cameraStatus);
             }
             const micStatus = await checkMicrophone();
             setIsMicOn(micStatus);
@@ -96,7 +98,13 @@ const VideoSettings = ({ setButtonDisabled }) => {
                     </div>
                     {isCameraOn === null ? <div className='icon-con mb-1'>
                         <img className='' src="/images/dvid.svg" alt="img" />
-                    </div> : <>{isCameraOn && <img className='mb-1' src="/images/check.svg" alt="img" />}</>}
+                    </div>
+                        :
+                        <>
+                            {isCameraOn && <img className='mb-1' src="/images/check.svg" alt="img" />}
+                            {!isCameraOn && <img className='mb-1' src="/images/dvid.svg" alt="img" />}
+                        </>
+                    }
                     <p>Webcam</p>
                 </div>
                 <div className='box'>
