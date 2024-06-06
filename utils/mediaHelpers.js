@@ -70,3 +70,16 @@ export const analyzeBrightness = (video, setIsBrightnessNormal) => {
 export const containsPerson = (detections) => {
     return detections.some(detection => detection.class.toLowerCase() === 'person');
 };
+
+// Function to download a single image
+export const downloadImage = async (imageUrl, fileName) => {
+    try {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(new Blob([blob])); 
+        localStorage.setItem(fileName, url);
+        //console.log('Image downloaded successfully:', fileName);
+    } catch (error) {
+        console.error('Error downloading image:', error);
+    }
+};
